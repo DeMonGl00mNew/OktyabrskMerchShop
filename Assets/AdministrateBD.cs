@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
-/*скрипт отвечающий за администрирование БД и отправка формы к БД;*/
+/*СЃРєСЂРёРїС‚ РѕС‚РІРµС‡Р°СЋС‰РёР№ Р·Р° Р°РґРјРёРЅРёСЃС‚СЂРёСЂРѕРІР°РЅРёРµ Р‘Р” Рё РѕС‚РїСЂР°РІРєР° С„РѕСЂРјС‹ Рє Р‘Р”;*/
 public class AdministrateBD : MonoBehaviour
 {
     public GameObject AdminPanel;
@@ -12,7 +12,7 @@ public class AdministrateBD : MonoBehaviour
     public TMP_Text Alert;
     public Send SendScript;
 
-    //валидация и запуск сопрограммы добавления пользователя
+    //РІР°Р»РёРґР°С†РёСЏ Рё Р·Р°РїСѓСЃРє СЃРѕРїСЂРѕРіСЂР°РјРјС‹ РґРѕР±Р°РІР»РµРЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     public void AddClick()
     {
         if (logintField.text != "" && passField.text != "" &&
@@ -21,23 +21,23 @@ public class AdministrateBD : MonoBehaviour
             StartCoroutine(AddUserCouratine());
         }
     }
-    //валидация и запуск сопрограммы добавления электронной почты
+    //РІР°Р»РёРґР°С†РёСЏ Рё Р·Р°РїСѓСЃРє СЃРѕРїСЂРѕРіСЂР°РјРјС‹ РґРѕР±Р°РІР»РµРЅРёСЏ СЌР»РµРєС‚СЂРѕРЅРЅРѕР№ РїРѕС‡С‚С‹
     public void AdminEmailPassClickOnly()
     {
         if (AdminEmailField.text != "" && AdminPassworField.text != "" && logintField.text == "")
         {
             SendScript.emailSvoy = AdminEmailField.text;
             SendScript.passwordSvoy = AdminPassworField.text;
-            Alert.text = $"Почта отправки чеков изменена на {AdminEmailField.text}";
+            Alert.text = $"РџРѕС‡С‚Р° РѕС‚РїСЂР°РІРєРё С‡РµРєРѕРІ РёР·РјРµРЅРµРЅР° РЅР° {AdminEmailField.text}";
         }
     }
-    //выключение панели администрирование и влючение панели ввода пользователя
+    //РІС‹РєР»СЋС‡РµРЅРёРµ РїР°РЅРµР»Рё Р°РґРјРёРЅРёСЃС‚СЂРёСЂРѕРІР°РЅРёРµ Рё РІР»СЋС‡РµРЅРёРµ РїР°РЅРµР»Рё РІРІРѕРґР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     public void Exit()
     {
         EnterPanel.SetActive(true);
         AdminPanel.SetActive(false);
     }
-    //сопрограмма добавления пользователя через bdMerchReg.php на сервере  eisk1848.ru в БД
+    //СЃРѕРїСЂРѕРіСЂР°РјРјР° РґРѕР±Р°РІР»РµРЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ С‡РµСЂРµР· bdMerchReg.php РЅР° СЃРµСЂРІРµСЂРµ  eisk1848.ru РІ Р‘Р”
     IEnumerator AddUserCouratine()
     {
         WWWForm form = new WWWForm();
@@ -47,7 +47,7 @@ public class AdministrateBD : MonoBehaviour
         form.AddField("count", CountField.text);
         UnityWebRequest www = UnityWebRequest.Post("http://eisk1848.ru/bdMerchReg.php ", form);
         yield return www.SendWebRequest();
-        Alert.text = $"Пользователь {logintField.text} добавлен в БД";
+        Alert.text = $"РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ {logintField.text} РґРѕР±Р°РІР»РµРЅ РІ Р‘Р”";
         www.Dispose();
     }
 }

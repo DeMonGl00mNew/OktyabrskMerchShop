@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-// скрипт вывода денег клиента при запуске приложения
+// СЃРєСЂРёРїС‚ РІС‹РІРѕРґР° РґРµРЅРµРі РєР»РёРµРЅС‚Р° РїСЂРё Р·Р°РїСѓСЃРєРµ РїСЂРёР»РѕР¶РµРЅРёСЏ
 public class SotrudnikPanel : MonoBehaviour
 {
     public TMP_Text DengiText;

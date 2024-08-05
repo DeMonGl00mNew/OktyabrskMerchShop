@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-//скрипт, отвечающий за логику магазина
+//СЃРєСЂРёРїС‚, РѕС‚РІРµС‡Р°СЋС‰РёР№ Р·Р° Р»РѕРіРёРєСѓ РјР°РіР°Р·РёРЅР°
 public class ShopLogic : MonoBehaviour
 {
     static public ShopLogic Instance { get; private set; }
@@ -13,15 +13,15 @@ public class ShopLogic : MonoBehaviour
 
     public GameObject FavoriteItem;
     public Transform IzbrannoePanel;
-    [Header("Время Скидки")]
+    [Header("Р’СЂРµРјСЏ РЎРєРёРґРєРё")]
     public int SaleTime = 60;
-    [Header("Атрибуты товаров")]
+    [Header("РђС‚СЂРёР±СѓС‚С‹ С‚РѕРІР°СЂРѕРІ")]
     public Sprite[] view2D;
     public GameObject[] view3D;
     public string[] title;
     public int[] price;
     public int[] sale;
-    [Header("Товар на сцене")]
+    [Header("РўРѕРІР°СЂ РЅР° СЃС†РµРЅРµ")]
     public Image View2DInScene;
     public TMP_Text TitleInScene;
     public TMP_Text PriceInScene;
@@ -29,7 +29,7 @@ public class ShopLogic : MonoBehaviour
 
     private int index = 0;
     private ItemInFavorites[] ListFavorites;
-    // паттерн Singletone для инициализации зависимостей
+    // РїР°С‚С‚РµСЂРЅ Singletone РґР»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№
     private void Awake()
     {
         if (Instance == null)
@@ -43,7 +43,7 @@ public class ShopLogic : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    // инициализация старта, организация логики скидок и отображения вещей в магащине
+    // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃС‚Р°СЂС‚Р°, РѕСЂРіР°РЅРёР·Р°С†РёСЏ Р»РѕРіРёРєРё СЃРєРёРґРѕРє Рё РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РІРµС‰РµР№ РІ РјР°РіР°С‰РёРЅРµ
     void Start()
     {
         sale = new int[price.Length];
@@ -51,7 +51,7 @@ public class ShopLogic : MonoBehaviour
         ViewInShop(index);
 
     }
-    //сопрограмма для организации таймера скидок
+    //СЃРѕРїСЂРѕРіСЂР°РјРјР° РґР»СЏ РѕСЂРіР°РЅРёР·Р°С†РёРё С‚Р°Р№РјРµСЂР° СЃРєРёРґРѕРє
     IEnumerator SaleTimer(int second)
     {
         while (true)
@@ -68,14 +68,14 @@ public class ShopLogic : MonoBehaviour
             {
                 SaleImage.SetActive(false);
                 BuyPredmet.StoymostVeshi = price[index];
-                PriceInScene.text = "Стоимость: " + BuyPredmet.StoymostVeshi;
+                PriceInScene.text = "РЎС‚РѕРёРјРѕСЃС‚СЊ: " + BuyPredmet.StoymostVeshi;
             }
                 
         }
 
 
     }
-    // функция отображения вещей в магазине 2d спратйов
+    // С„СѓРЅРєС†РёСЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РІРµС‰РµР№ РІ РјР°РіР°Р·РёРЅРµ 2d СЃРїСЂР°С‚Р№РѕРІ
     public void ViewInShop(int i)
     {
         View2DInScene.sprite = view2D[i];
@@ -94,9 +94,9 @@ public class ShopLogic : MonoBehaviour
             BuyPredmet.StoymostVeshi = price[i];
         }
 
-        PriceInScene.text = "Стоимость: " + BuyPredmet.StoymostVeshi;
+        PriceInScene.text = "РЎС‚РѕРёРјРѕСЃС‚СЊ: " + BuyPredmet.StoymostVeshi;
     }
-    // функция отображения вещей в магазине 3d объектов
+    // С„СѓРЅРєС†РёСЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РІРµС‰РµР№ РІ РјР°РіР°Р·РёРЅРµ 3d РѕР±СЉРµРєС‚РѕРІ
     private void Activate3DItem(int index)
     {
         for (int i = 0; i < view3D.Length; i++)
@@ -107,19 +107,19 @@ public class ShopLogic : MonoBehaviour
                 view3D[i].SetActive(false);
         }
     }
-    //функция валидации и отображения следующей вещи при нажатии на кнопку следующая
+    //С„СѓРЅРєС†РёСЏ РІР°Р»РёРґР°С†РёРё Рё РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЃР»РµРґСѓСЋС‰РµР№ РІРµС‰Рё РїСЂРё РЅР°Р¶Р°С‚РёРё РЅР° РєРЅРѕРїРєСѓ СЃР»РµРґСѓСЋС‰Р°СЏ
     public void nextItem()
     {
         index = Mathf.Clamp(++index, 0, 5);
         ViewInShop(index);
     }
-    //функция валидации и отображения предыдущей вещи при нажатии на кнопку предыдущая
+    //С„СѓРЅРєС†РёСЏ РІР°Р»РёРґР°С†РёРё Рё РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РїСЂРµРґС‹РґСѓС‰РµР№ РІРµС‰Рё РїСЂРё РЅР°Р¶Р°С‚РёРё РЅР° РєРЅРѕРїРєСѓ РїСЂРµРґС‹РґСѓС‰Р°СЏ
     public void previouseItem()
     {
         index = Mathf.Clamp(--index, 0, 5);
         ViewInShop(index);
     }
-    //функция занесения сохранения и отображения избранных вещей
+    //С„СѓРЅРєС†РёСЏ Р·Р°РЅРµСЃРµРЅРёСЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ Рё РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РёР·Р±СЂР°РЅРЅС‹С… РІРµС‰РµР№
     public void ToFavorites()
     {
 
@@ -136,7 +136,7 @@ public class ShopLogic : MonoBehaviour
         itemInFavorites.GetComponent<Image>().sprite = view2D[index];
         SavedFavorites();
     }
-    // сохранение избранных вещей
+    // СЃРѕС…СЂР°РЅРµРЅРёРµ РёР·Р±СЂР°РЅРЅС‹С… РІРµС‰РµР№
     public void SavedFavorites()
     {
         stringForFavoritesList = "";
@@ -155,12 +155,12 @@ public class ShopLogic : MonoBehaviour
         PlayerPrefs.SetString("SavedList", stringForFavoritesList);
         PlayerPrefs.Save();
     }
-    // функция перевода из символа в целые
+    // С„СѓРЅРєС†РёСЏ РїРµСЂРµРІРѕРґР° РёР· СЃРёРјРІРѕР»Р° РІ С†РµР»С‹Рµ
     private int CharToInt(char simbol)
     {
         return (int)char.GetNumericValue(simbol);
     }
-    // функция загрузки избранных вещей
+    // С„СѓРЅРєС†РёСЏ Р·Р°РіСЂСѓР·РєРё РёР·Р±СЂР°РЅРЅС‹С… РІРµС‰РµР№
     public void LoadFavorites()
     {
         if (!PlayerPrefs.HasKey("SavedList"))
@@ -170,7 +170,7 @@ public class ShopLogic : MonoBehaviour
 
         if (stringForFavoritesList == "")
             return;
-        // функция привязки 3d объектов и 2d спрайтов
+        // С„СѓРЅРєС†РёСЏ РїСЂРёРІСЏР·РєРё 3d РѕР±СЉРµРєС‚РѕРІ Рё 2d СЃРїСЂР°Р№С‚РѕРІ
         Activate3DItem(CharToInt(stringForFavoritesList[0]));
         foreach (char iChar in stringForFavoritesList)
         {

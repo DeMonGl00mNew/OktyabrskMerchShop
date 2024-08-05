@@ -1,6 +1,6 @@
 using UnityEngine;
 
-/*выход из приложения*/
+/*РІС‹С…РѕРґ РёР· РїСЂРёР»РѕР¶РµРЅРёСЏ*/
 public class ExitScript : MonoBehaviour
 {
 public void Close()

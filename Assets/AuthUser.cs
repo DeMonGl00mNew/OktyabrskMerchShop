@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.Networking;
-/*скрипт авторизации пользователя, и отправка формы к БД*/
+/*СЃРєСЂРёРїС‚ Р°РІС‚РѕСЂРёР·Р°С†РёРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ, Рё РѕС‚РїСЂР°РІРєР° С„РѕСЂРјС‹ Рє Р‘Р”*/
 public class AuthUser : MonoBehaviour
 {
     public GameObject AdminPanel;
@@ -19,7 +19,7 @@ public class AuthUser : MonoBehaviour
     public string CurrentEmail;
 
     public bool adminBD=false;
-    // паттерн Singletone для инициализации зависимостей
+    // РїР°С‚С‚РµСЂРЅ Singletone РґР»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№
     private void Awake()
     {
         if (Instance == null)
@@ -32,7 +32,7 @@ public class AuthUser : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    // функция валидации и вызов сопрограммы авторизация пользователя при нажатии на кнопку войти
+    // С„СѓРЅРєС†РёСЏ РІР°Р»РёРґР°С†РёРё Рё РІС‹Р·РѕРІ СЃРѕРїСЂРѕРіСЂР°РјРјС‹ Р°РІС‚РѕСЂРёР·Р°С†РёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РїСЂРё РЅР°Р¶Р°С‚РёРё РЅР° РєРЅРѕРїРєСѓ РІРѕР№С‚Рё
     public void ButtonClick()
     {
         if (adminBD)
@@ -44,7 +44,7 @@ public class AuthUser : MonoBehaviour
             }
           else
             {
-                Alert.text ="Этот пользователь не имеет прав доступа, как администратор БД";
+                Alert.text ="Р­С‚РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РЅРµ РёРјРµРµС‚ РїСЂР°РІ РґРѕСЃС‚СѓРїР°, РєР°Рє Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ Р‘Р”";
             }
         }
         else
@@ -55,8 +55,8 @@ public class AuthUser : MonoBehaviour
 
 
     }
-    // сопрограмма авторизации пользователя  и отсылка данных аутентификации на сервер eisk1848.ru
-    // ожидание авторизации и переход в панель сотрудников
+    // СЃРѕРїСЂРѕРіСЂР°РјРјР° Р°РІС‚РѕСЂРёР·Р°С†РёРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ  Рё РѕС‚СЃС‹Р»РєР° РґР°РЅРЅС‹С… Р°СѓС‚РµРЅС‚РёС„РёРєР°С†РёРё РЅР° СЃРµСЂРІРµСЂ eisk1848.ru
+    // РѕР¶РёРґР°РЅРёРµ Р°РІС‚РѕСЂРёР·Р°С†РёРё Рё РїРµСЂРµС…РѕРґ РІ РїР°РЅРµР»СЊ СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ
     public IEnumerator AuthUserCouratine(string login, string pass)
     {
         WWWForm form = new WWWForm();
@@ -70,7 +70,7 @@ public class AuthUser : MonoBehaviour
         string data = www.downloadHandler.text;
         www.Dispose();
 
-        if (data != "неверный логин или пароль")
+        if (data != "РЅРµРІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ")
         {
             data = data.Remove(data.Length - 1);
             CurrentLogin = loginInputField.text;
@@ -92,7 +92,7 @@ public class AuthUser : MonoBehaviour
     }
 
 
-    // сопрограмма полуения информации о денежных средствах с сервера
+    // СЃРѕРїСЂРѕРіСЂР°РјРјР° РїРѕР»СѓРµРЅРёСЏ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РґРµРЅРµР¶РЅС‹С… СЃСЂРµРґСЃС‚РІР°С… СЃ СЃРµСЂРІРµСЂР°
     public IEnumerator UserBuyCouratine(string id, int money)
     {
         WWWForm form = new WWWForm();
@@ -103,7 +103,7 @@ public class AuthUser : MonoBehaviour
         yield return www.SendWebRequest();
         www.Dispose();
     }
-    // функция интерпретации ответа с сервера - разбиение по рапзделителю строки
+    // С„СѓРЅРєС†РёСЏ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё РѕС‚РІРµС‚Р° СЃ СЃРµСЂРІРµСЂР° - СЂР°Р·Р±РёРµРЅРёРµ РїРѕ СЂР°РїР·РґРµР»РёС‚РµР»СЋ СЃС‚СЂРѕРєРё
     public string GetValue(string data, string index)
     {
         string val = data.Substring(data.IndexOf(index) + index.Length);
@@ -111,7 +111,7 @@ public class AuthUser : MonoBehaviour
             val = val.Remove(val.IndexOf("|"));
         return val;
     }
-    // функция активации опции администрирования
+    // С„СѓРЅРєС†РёСЏ Р°РєС‚РёРІР°С†РёРё РѕРїС†РёРё Р°РґРјРёРЅРёСЃС‚СЂРёСЂРѕРІР°РЅРёСЏ
     public void adminBDToggle(bool isAdmin)
     {
         adminBD = isAdmin;

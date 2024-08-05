@@ -4,19 +4,19 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System;
 
-/*ñêðèïò ïîêóïêè òîâàðà, àêòèâàöèè îòñûëêè íà ïî÷òó, îáíîâëåíèÿ êîëè÷åñòâà âàëþòû â ÁÄ;*/
+/*ÑÐºÑ€Ð¸Ð¿Ñ‚ Ð¿Ð¾ÐºÑƒÐ¿ÐºÐ¸ Ñ‚Ð¾Ð²Ð°Ñ€Ð°, Ð°ÐºÑ‚Ð¸Ð²Ð°Ñ†Ð¸Ð¸ Ð¾Ñ‚ÑÑ‹Ð»ÐºÐ¸ Ð½Ð° Ð¿Ð¾Ñ‡Ñ‚Ñƒ, Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð° Ð²Ð°Ð»ÑŽÑ‚Ñ‹ Ð² Ð‘Ð”;*/
 public class BuyPredmet : MonoBehaviour
 {
     static public int StoymostVeshi;
     public TMP_Text DengiText;
     public Send EmailSendManger;
 
-    // ôóíêöèÿ çàïóñêà ñîïðîãðàììû äåíåæíîé òðàíçàêöèè ïðè íàæàòèè êíîïêè êóïèòü
+    // Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ Ð·Ð°Ð¿ÑƒÑÐºÐ° ÑÐ¾Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹ Ð´ÐµÐ½ÐµÐ¶Ð½Ð¾Ð¹ Ñ‚Ñ€Ð°Ð½Ð·Ð°ÐºÑ†Ð¸Ð¸ Ð¿Ñ€Ð¸ Ð½Ð°Ð¶Ð°Ñ‚Ð¸Ð¸ ÐºÐ½Ð¾Ð¿ÐºÐ¸ ÐºÑƒÐ¿Ð¸Ñ‚ÑŒ
     public void BuyOnClick()
     {
         StartCoroutine(RefreshMoneyCouratine(AuthUser.Instance.CurrentLogin, AuthUser.Instance.CurrentPassword));
     }
-    // ñîïðîãðàììà äåíåæíîé òðàíçàêöèè è îáíîâëåíèå èíôîðìàöèè íà ñåðâåðå â ÁÄ
+    // ÑÐ¾Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð° Ð´ÐµÐ½ÐµÐ¶Ð½Ð¾Ð¹ Ñ‚Ñ€Ð°Ð½Ð·Ð°ÐºÑ†Ð¸Ð¸ Ð¸ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€Ðµ Ð² Ð‘Ð”
     public IEnumerator RefreshMoneyCouratine(string login, string pass)
     {
         WWWForm form = new WWWForm();
@@ -29,7 +29,7 @@ public class BuyPredmet : MonoBehaviour
 
         string data = www.downloadHandler.text;
         www.Dispose();
-        if (data != "íåâåðíûé ëîãèí èëè ïàðîëü")
+        if (data != "Ð½ÐµÐ²ÐµÑ€Ð½Ñ‹Ð¹ Ð»Ð¾Ð³Ð¸Ð½ Ð¸Ð»Ð¸ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ")
         {
             data = data.Remove(data.Length - 1);
             AuthUser.Instance.CurrentMoney = Convert.ToInt32(AuthUser.Instance.GetValue(data, "Money:"));
@@ -37,7 +37,7 @@ public class BuyPredmet : MonoBehaviour
         }
 
     }
-    // ôóíêöèÿ âû÷èñëåíèÿ ñòîèìîñòè ïðåäìåòà è îòïðàâêà ýëåêòðîííîãî ïèñüìà
+    // Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ Ð²Ñ‹Ñ‡Ð¸ÑÐ»ÐµÐ½Ð¸Ñ ÑÑ‚Ð¾Ð¸Ð¼Ð¾ÑÑ‚Ð¸ Ð¿Ñ€ÐµÐ´Ð¼ÐµÑ‚Ð° Ð¸ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÐºÐ° ÑÐ»ÐµÐºÑ‚Ñ€Ð¾Ð½Ð½Ð¾Ð³Ð¾ Ð¿Ð¸ÑÑŒÐ¼Ð°
     private void MoneyMinusStoymost()
     {
         if (AuthUser.Instance.CurrentMoney >= StoymostVeshi)
